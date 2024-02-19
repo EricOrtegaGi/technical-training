@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Propietat</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="estate_property_tree" model="ir.ui.view">
+        <field name="name">estate.property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree string="Propietat Immo">
+                <field name="name"/>
+                <field name="tag_ids"/>
+                <field name="postcode"/>
+                <field name="date_availability"/>
+                <field name="expected_selling_price"/>
+                <field name="bedrooms"/>
+                <field name="buyer_id"/>
+                <field name ="state"/>
+                <field name="Type_id"/>
+                <field name="salesperson_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="estate_property_view_filter" model="ir.ui.view">
+        <field name="name">estate.property.filter</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Search Property">
+                <field name="name"/>
+                <field name="tag_ids"/>
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="bedrooms"/>
+                <field name="selling_price"/>
+                <field name="Type_id"/>
+                <filter string="Disponibles" name="Disponibles" domain="['|',('state', '=', 'New'),('state', '=', 'Offer Received')]" help="Propietats noves o amb oferta rebuda"/>
+                <group expand="0" string="Group By">
+                    <filter string="Codi Postal" name="Codi Postal" context="{'group_by':'postcode'}"/>
+                    <filter string="Tipus" name="Tipo" context="{'group_by':'Type_id'}"/>
+                    <filter string="Preu de venda" name="Preu de venda" context="{'group_by':'selling_price'}"/>
+                    <filter string="state" name="state" context="{'group_by':'state'}"/>
+                    <filter string="date_availability" name="date_availability" context="{'group_by':'date_availability'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">       
+            <form string="Propietat Immobiliària">
+            <header>
+                <button name="cancellarPropietat" string="Cancel·lar" type="object" class="oe_highlight"/>
+            </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <field name="tag_ids"/>
+                    
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="postcode"></field>
+                        </group>
+                        <group colspan="1">
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="selling_price"/>
+                        </group>
+                        <group>
+                            <field name="bedrooms"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="expected_selling_price"/>
+                        </group>
+                        <group>
+                            <field name="area"/>
+                        </group>
+                        <group>
+                            <field name="avgPrice"/>
+                        </group>
+                        <group>
+                            <field name="Type_id"/>
+                        </group>
+                        <group>
+                            <field name="certificat_energetic"/>
+                        </group>
+                        <group>
+                            <field name="any_construccio"/>
+                        </group>
+                        <group>
+                            <field name="banys"/>
+                        </group>
+                        <group>
+                            <field name="parking"/>
+                        </group>
+                        <notebook>
+                            <page string="Descripció">
+                                <field name="_description"/>
+                            </page>
+                            <page string="Ofertes">
+                                <group>
+                                    <field name="offer_ids" nolabel="1" colspan="2"/>
+                                </group>
+                            </page>     
+                            <page string="Altres informacions">
+                                <group>
+                                    <field name="buyer_id"/>
+                                    <field name="salesperson_id"/>
+                                </group>                            
+                            </page>                      
+                        </notebook>                          
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="estate_property_tag_action" model="ir.actions.act_window">
+        <field name="name">Etiqueta</field>
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">Tipus</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="estate_property_offer_tree" model="ir.ui.view"> 
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree string="Oferta">
+                <field name="partner_id"/>
+                <field name="price"/>
+                <field name="status"/>
+            </tree>          
+        </field>
+    </record>
+    <record id="estate_property_offer_view_form" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form string="Oferta">           
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="price"/>
+                            <field name="status"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>   
+</odoo>
